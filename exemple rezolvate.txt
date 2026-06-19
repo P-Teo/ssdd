@@ -1,0 +1,142 @@
+L4	-Agenda REST -1, 41
+	-Cheltuieli familie -13
+
+L8      - bataie de inima 2
+	-ex chat 14, 27, 28, 29, 30, 31, 31, 38 -problema 2 clean runnable
+
+
+L11-
+	-  Ciurul Erastotene - reuniune a b in adt c -4,17
+	- Ciurul Erastotene -bn=suma(ai*ai)-3B
+	- Ciurul Erastotene -a*b=a+b*3 -16b ,37B 
+
+L3 - Vremea App- orchestrarea citeste-5
+	  	- ilantuirea  -24(scrie), 25(API)
+
+L7 - Okazzii -6, 21, 22
+
+L 14 - TCP        - 40% , Py-7
+	   	  - 500 caractere , Py- 8
+	   	  -23, 33, 34
+		  -png url rng - 26
+
+
+L10- Rabbit si Py- 9(jurnal), 18(intre 1-5), 19(erori),20(nr de mesaje),40(erori)
+
+L6      - ex 2- 10
+	- ex 1 -12B, 39
+
+L12- Map-Reduce- 11(cocument), 15(url), 35(document), 36(url)
+
+
+
+
+netstat -ano | findstr :1500
+taskkill /PID 12345 /F
+
+
+http://localhost:8080/getforecast/iasi
+
+
+$env:JAVA_HOME="C:\Users\Teodora\.jdks\corretto-11.0.26"
+$env:Path += ";$env:JAVA_HOME\bin"
+mvn clean package 
+java -version
+java -jar target\eratostene-0.1-shaded.jar
+'{"number":"8"}' | java -jar target\eratostene-0.1.jar
+
+
+L7
+
+rxjava 3 jar download
+./gradlew :compileKotlin
+
+
+
+docker run -d --name rabbit-okazii -p 5678:5672 -p 15672:15672 rabbitmq:3-management
+
+# 1. Oprește containerul curent
+docker stop rabbit-okazii
+
+# 2. Șterge containerul curent ca să eliberezi numele
+docker rm -f rabbit-okazii
+
+# 3. Pornește containerul nou configurat special pentru "student"
+docker run -d --name rabbit-okazii -e RABBITMQ_DEFAULT_USER=student -e RABBITMQ_DEFAULT_PASS=student -p 5678:5672 -p 15672:15672 rabbitmq:3-management
+
+docker run -d --name rabbit-licitatie \
+  -p 5678:5672 -p 15672:15672 \
+  -e RABBITMQ_DEFAULT_USER=student \
+  -e RABBITMQ_DEFAULT_PASS=student \
+  rabbitmq:3-management
+
+docker run -d --name rabbit-licitatie -p 5678:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=student -e RABBITMQ_DEFAULT_PASS=student rabbitmq:3-management
+
+Deschide browserul și accesează: http://localhost:15672
+
+Loghează-te cu userul standard: username guest, password guest (sau student/student dacă i-ai configurat altfel în Docker).
+Mergi sus pe tab-ul Queues.
+Caută secțiunea de jos numită Add a new queue.
+La Name scrie exact numele din eroarea ta: okazii.queue_log
+Apasă pe butonul Add queue.
+ipconfig
+
+
+
+
+
+
+
+
+
+
+
+
+# 1. Pornim cele 4 microservicii în fundal ascunse (nu vor deschide ferestre noi)
+$proc1 = Start-Process python -ArgumentList "Auctioneer.py" -NoNewWindow -PassThru
+$proc2 = Start-Process python -ArgumentList "MessageProcessor.py" -NoNewWindow -PassThru
+$proc3 = Start-Process python -ArgumentList "BiddingProcessor.py" -NoNewWindow -PassThru
+$proc4 = Start-Process python -ArgumentList "ErrorProcessor.py" -NoNewWindow -PassThru
+
+# 2. Așteptăm 2 secunde ca serviciile să se inițializeze în RabbitMQ
+Start-Sleep -Seconds 2
+
+# 3. Rulăm cei 10 ofertanți (Bidders) direct în acest terminal, pe rând, rapid
+print "[INFO] Se lanseaza ofertantii..."
+for ($i=1; $i -le 10; $i++) {
+    python3 Bidder.py
+}
+
+# 4. Opțional: Curățăm procesele din fundal după ce s-a terminat licitația
+Stop-Process -Id $proc1.Id, $proc2.Id, $proc3.Id, $proc4.Id -Force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://localhost:8080/print?format=json
+http://localhost:8080/find?author=Jules%20Verne
+
+
+
+
+
+
+
+
+bin/kafka-server-start.sh config/server.properties
+
+bin/kafka-topics.sh --create --topic state-00 --bootstrap-server localhost:9092
+bin/kafka-topics.sh --create --topic state-01 --bootstrap-server localhost:9092
+bin/kafka-topics.sh --create --topic state-10 --bootstrap-server localhost:9092
+bin/kafka-topics.sh --create --topic state-11 --bootstrap-server localhost:9092
