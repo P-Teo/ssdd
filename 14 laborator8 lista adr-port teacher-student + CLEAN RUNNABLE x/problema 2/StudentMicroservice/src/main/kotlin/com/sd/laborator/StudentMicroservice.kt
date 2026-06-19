@@ -19,7 +19,7 @@ class StudentMicroservice {
     private lateinit var studentServerSocket: ServerSocket
     init {
 
-        val databaseLines: List<String> = File("/home/stefan/Documents/Rezolvari Subiecte/14 laborator8 de verificat/problema 2/StudentMicroservice/questions_database.txt").readLines()
+        val databaseLines: List<String> = File("D:/sd/trytry/14 laborator8 lista adr-port teacher-student + CLEAN RUNNABLE x/problema 2/StudentMicroservice/questions_database.txt").readLines()
         questionDatabase = mutableListOf()
 
         /*

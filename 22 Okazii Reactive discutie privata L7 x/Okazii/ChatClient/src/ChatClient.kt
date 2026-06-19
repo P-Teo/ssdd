@@ -10,8 +10,8 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class ChatClient {
-    private var masterSocket: Socket
-    private var messagesObservable: Observable<String>
+    private lateinit var masterSocket: Socket
+    private lateinit var messagesObservable: Observable<String>
     private var myIdentity: String = "[CLIENT_NECONECTAT]"
 
     companion object Constants {
@@ -22,80 +22,94 @@ class ChatClient {
     init {
         try {
             masterSocket = Socket(MASTER_HOST, MASTER_PORT)
-            println("M-am conectat la Master!")
-
             myIdentity = "[${masterSocket.localPort}]"
+            println("$myIdentity M-am conectat la Master!")
 
-            // se creeaza un obiect Observable ce va emite mesaje primite printr-un TCP
-            // fiecare mesaj primit reprezinta un element al fluxului de date reactiv
+            // FLUX REACTIV REPARAT: Citeste continuu din socket pe o singura instanta de BufferedReader
             messagesObservable = Observable.create<String> { emitter ->
-                while (true) {
-                    println(masterSocket)
+                try {
                     val bufferReader = BufferedReader(InputStreamReader(masterSocket.inputStream))
 
-                    val receivedMessage = bufferReader.readLine()
+                    while (!masterSocket.isClosed) {
+                        val receivedMessage = bufferReader.readLine()
 
-                    // daca se primeste un mesaj gol (NULL), atunci inseamna ca cealalta parte a socket-ului a fost inchisa
-                    if (receivedMessage == null) {
-                        bufferReader.close()
-                        masterSocket.close()
+                        // Daca serverul s-a oprit, readLine() intoarce null
+                        if (receivedMessage == null) {
+                            bufferReader.close()
+                            masterSocket.close()
+                            emitter.onError(Exception("MasterMicroservice s-a deconectat."))
+                            return@create
+                        }
 
-                        emitter.onError(Exception("MasterMicroservice s-a deconectat."))
-                        return@create
+                        // Emitem mesajul curat in fluxul reactiv
+                        emitter.onNext(receivedMessage)
                     }
-
-                    // mesajul primit este emis in flux
-                    emitter.onNext(receivedMessage)
-
-//                    bufferReader.close()
-//                    masterSocket.close()
+                } catch (e: Exception) {
+                    if (!emitter.isDisposed) {
+                        emitter.onError(e)
+                    }
                 }
             }
         } catch (e: Exception) {
-            println("$myIdentity Nu ma pot conecta la Master!")
+            println("$myIdentity Nu ma pot conecta la Master! Asigura-te ca ChatMaster ruleaza.")
             exitProcess(1)
         }
     }
 
     private fun sendMessage(message: String) {
-        // se creeaza mesajul care incapsuleaza oferta
-        val randomMessageObject = Message.create(
-            "${masterSocket.localAddress}:${masterSocket.localPort}",
-            message
-        )
-
-        val serializedMessage = randomMessageObject.serialize()
-        masterSocket.getOutputStream().write(serializedMessage)
+        try {
+            // Trimitem mesajul text brut, procesorul de comunicatie din Master se va ocupa de impachetare
+            val outputStream = masterSocket.getOutputStream()
+            outputStream.write((message + "\n").toByteArray())
+            outputStream.flush()
+        } catch (e: Exception) {
+            println("$myIdentity Eroare la trimiterea mesajului: ${e.message}")
+        }
     }
 
     private fun waitForResponse() {
-        println("$myIdentity Astept mesaje de la master...")
-        val auctionResultSubscription = messagesObservable.subscribeBy(
-            onNext = {
-                println("$myIdentity Raspuns de la ceilalti: $it")
+        println("$myIdentity Astept mesaje de la camera mea privata...")
+
+        val chatSubscription = messagesObservable.subscribeBy(
+            onNext = { msg ->
+                println("$myIdentity [Mesaj primit]: $msg")
             },
-            onError = {
-                println("$myIdentity Eroare: $it")
+            onError = { err ->
+                println("$myIdentity Eroare flux: ${err.message}")
             }
         )
 
-        // se elibereaza memoria obiectului Subscription
-        auctionResultSubscription.dispose()
+        // Lasam subscription-ul activ pe toata durata rularii firului de executie
     }
 
     fun run() {
+        // Pornim ascultarea mesajelor pe un fir de executie de fundal
         thread { waitForResponse() }
+
+        // Trimitem un set de 7 mesaje simulate la interval de 3 secunde
         for (i in 0..6) {
             val randomMessage = Random.nextInt(0, 1000)
             sleep(3000)
-            sendMessage(randomMessage.toString())
+            println("$myIdentity Trimit valoarea: $randomMessage")
+            sendMessage("Am generat valoarea aleatorie: $randomMessage")
         }
+
+        // Semnalizam politicos inchiderea transmisiei conform protocolului
         sleep(3000)
-        masterSocket.getOutputStream().write("end of transmission".toByteArray())
+        try {
+            masterSocket.getOutputStream().write("end of transmission\n".toByteArray())
+            masterSocket.getOutputStream().flush()
+            masterSocket.close()
+            println("$myIdentity Am parasit camera de chat.")
+        } catch (e: Exception) {
+            // Socket-ul era deja inchis
+        }
     }
 }
 
-fun main(args: Array<String>) {
+// FUNCTIA MAIN: Curatata si pusa COMPLET in afara clasei.
+// Săgeata verde de Run va apărea acum în stânga acestei linii!
+fun main() {
     val chatClient = ChatClient()
     chatClient.run()
 }

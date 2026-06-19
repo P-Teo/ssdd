@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MessageManagerMicroservice/MessageManagerMicroservice.iml" filepath="$PROJECT_DIR$/MessageManagerMicroservice/MessageManagerMicroservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/StudentMicroservice/StudentMicroservice.iml" filepath="$PROJECT_DIR$/StudentMicroservice/StudentMicroservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TeacherMicroservice/TeacherMicroservice.iml" filepath="$PROJECT_DIR$/TeacherMicroservice/TeacherMicroservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/problema 2.iml" filepath="$PROJECT_DIR$/.idea/problema 2.iml" />
     </modules>
   </component>

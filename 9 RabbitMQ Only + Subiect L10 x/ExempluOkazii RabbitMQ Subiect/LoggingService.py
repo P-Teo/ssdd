@@ -1,6 +1,6 @@
 from RabbitPC import *
 config_logger_consumer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',

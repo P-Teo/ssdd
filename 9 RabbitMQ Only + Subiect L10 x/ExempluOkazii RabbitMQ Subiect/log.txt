@@ -8,3 +8,12 @@ Terminare procesare si trimitere la BiddingProcessor - 2020-08-15
 Populare dictionar cu identitate si suma - 2020-08-15
 Populare dictionar cu identitate si suma - 2020-08-15
 Decidere castigatori - 2020-08-15
+Initializare MessageProcessor - 2026-06-19
+Se consuma bid-urile primite de la Auctioneer - 2026-06-19
+Initializare BiddingProcessor - 2026-06-19
+Consumare bid-uri procesate - 2026-06-19
+Eliminare duplicate - 2026-06-19
+Sortare timestamp - 2026-06-19
+Terminare procesare si trimitere la BiddingProcessor - 2026-06-19
+Populare dictionar cu identitate si suma - 2026-06-19
+Decidere castigatori - 2026-06-19

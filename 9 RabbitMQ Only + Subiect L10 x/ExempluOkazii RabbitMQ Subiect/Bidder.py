@@ -5,7 +5,7 @@ from uuid import uuid4
 from RabbitPC import *
 
 config_bid_producer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -15,7 +15,7 @@ config_bid_producer = {
 }
 
 config_result_consumer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',

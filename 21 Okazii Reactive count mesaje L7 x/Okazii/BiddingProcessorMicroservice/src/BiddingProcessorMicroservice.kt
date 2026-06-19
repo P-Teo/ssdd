@@ -93,6 +93,12 @@ class BiddingProcessorMicroservice {
     }
 
     private fun decideAuctionWinner() {
+
+        if (processedBidsQueue.isEmpty()) {
+            println("[WARN] Nu s-a primit nicio ofertă validă în această rundă.")
+            return
+        }
+
         // se calculeaza castigatorul ca fiind cel care a ofertat cel mai mult
         val winner: Message? = processedBidsQueue.toList().maxBy {
             // corpul mesajului e de forma "licitez <SUMA_LICITATA>"

@@ -96,10 +96,15 @@ class BiddingProcessorMicroservice {
     }
 
     private fun decideAuctionWinner() {
-        // se calculeaza castigatorul ca fiind cel care a ofertat cel mai mult
-        val winner: Message? = processedBidsQueue.toList().maxBy {
-            // corpul mesajului e de forma "licitez <SUMA_LICITATA>"
-            // se preia a doua parte, separata de spatiu
+        // CORECTARE: Verificăm dacă s-a primit vreo ofertă
+        if (processedBidsQueue.isEmpty()) {
+            println("[BiddingProcessor] Licitatția s-a încheiat, dar nu s-a primit nicio ofertă validă.")
+            biddingProcessorSocket.close()
+            return
+        }
+
+        // Calculăm câștigătorul în siguranță deoarece știm că lista nu e goală
+        val winner: Message? = processedBidsQueue.toList().maxByOrNull {
             it.body.split(" ")[1].toInt()
         }
 
@@ -107,11 +112,8 @@ class BiddingProcessorMicroservice {
 
         try {
             auctioneerSocket = Socket(AUCTIONEER_HOST, AUCTIONEER_PORT)
-
-            // se trimite castigatorul catre AuctioneerMicroservice
             auctioneerSocket.getOutputStream().write(winner!!.serialize())
             auctioneerSocket.close()
-
             println("Am anuntat castigatorul catre AuctioneerMicroservice.")
         } catch (e: Exception) {
             println("Nu ma pot conecta la Auctioneer!")

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/DockerRegistryMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DockerRegistryMicroservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MessageManagerMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MessageManagerMicroservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PublisherMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PublisherMicroservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StudentMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StudentMicroservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SubscriberMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SubscriberMicroservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TeacherMicroservice/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TeacherMicroservice/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

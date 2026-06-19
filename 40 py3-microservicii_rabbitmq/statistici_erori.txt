@@ -1,0 +1,8 @@
+=== STATISTICI ERORI LICITATIE ===
+Total erori inregistrate pana la adjudecare: 3
+---------------------------------
+- Erori de Comunicatie (Retea/Broker): 0 (0.00%)
+- Erori de Sistem de Cozi (RabbitMQ): 0 (0.00%)
+- Erori de Timeout / Lipsa Mesaje: 0 (0.00%)
+- Erori de Aplicatie / Validare: 3 (100.00%)
+=================================

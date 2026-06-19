@@ -5,40 +5,53 @@ from datetime import date
 import requests
 import json
 
-# Facem rost de simboluri
-symbols = requests.get('https://finnhub.io/api/v1/stock/symbol?exchange=US&token=brmr2kfrh5rcss140jmg')
-parsed_symbols = json.loads(symbols.text)
+# Preluăm simbolurile companiilor
+print("Preluare simboluri...")
+response = requests.get('https://finnhub.io/api/v1/stock/symbol?exchange=US&token=brmr2kfrh5rcss140jmg')
+parsed_symbols = json.loads(response.text)
 
-# Cream serverul in care vom trimite simbolurile si stirile
+# Pentru teste, limităm la primele 20 de simboluri ca să nu atingem imediat limitarea API
+test_symbols = parsed_symbols[:20]
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Bind the socket to the port
 server_address = ('localhost', 9999)
-print(sys.stderr, 'starting up on %s port %s' % server_address)
+print(f'Serverul pornește pe {server_address[0]} portul {server_address[1]}', file=sys.stderr)
 sock.bind(server_address)
-
-# Listen for incoming connections
 sock.listen(1)
 
 while True:
-    # Wait for a connection
-    print(sys.stderr, 'waiting for a connection')
+    print('Așteptare conexiune client...', file=sys.stderr)
     connection, client_address = sock.accept()
 
     try:
-        print(sys.stderr, 'connection from', client_address)
+        print('Conexiune acceptată de la:', client_address, file=sys.stderr)
 
-        for symbol in parsed_symbols:
-            # Aici facem cerere pentru stirile asociate simbolului
-            news_associated = requests.get('https://finnhub.io/api/v1/company-news?symbol='+ str(symbol['symbol']) + '&from=' + str(date.today()) + '&to=' + str(date.today()) + '&token=brmr2kfrh5rcss140jmg')
+        for symbol in test_symbols:
+            sym = symbol['symbol']
+            today_str = date.today().strftime('%Y-%m-%d')
+            
+            # Cerere știri pentru simbolul curent
+            news_url = f'https://finnhub.io/api/v1/company-news?symbol={sym}&from={today_str}&to={today_str}&token=brmr2kfrh5rcss140jmg'
+            news_response = requests.get(news_url)
+            
+            # Respectăm limita API (max 60 cereri/min -> ~1 cerere la 1-2 secunde)
+            time.sleep(1.5) 
+            
+            if news_response.status_code != 200:
+                continue
 
-            parsed_news_associated = json.loads(news_associated.text)
+            parsed_news = json.loads(news_response.text)
 
-            for piece_of_news in parsed_news_associated:
-                # fara \n nu merge
-                connection.sendall(bytes(str(piece_of_news).replace('\"', 'IquoteI').replace('\'', '\"') + '\n', encoding='utf8')) # transformam in sr fiindca by default e dict
+            for piece_of_news in parsed_news:
+                # Serializare curată în format JSON + separatorul standard de linie '\n'
+                json_data = json.dumps(piece_of_news) + "\n"
+                connection.sendall(bytes(json_data, encoding='utf8'))
+                
+                print(f"Trimis știre pentru {sym}")
+                # Cerința: o știre la fiecare 3 secunde
                 time.sleep(3)
 
+    except Exception as e:
+        print(f"Eroare: {e}", file=sys.stderr)
     finally:
-        # Clean up the connection
         connection.close()

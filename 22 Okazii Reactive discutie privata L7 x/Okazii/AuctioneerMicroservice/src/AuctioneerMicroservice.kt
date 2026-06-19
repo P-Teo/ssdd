@@ -21,7 +21,7 @@ class AuctioneerMicroservice {
         const val MESSAGE_PROCESSOR_HOST = "localhost"
         const val MESSAGE_PROCESSOR_PORT = 1600
         const val AUCTIONEER_PORT = 1500
-        const val AUCTION_DURATION: Long = 15_000 // licitatia dureaza 15 secunde
+        const val AUCTION_DURATION: Long = 100_000 // licitatia dureaza 100 secunde
     }
 
     init {

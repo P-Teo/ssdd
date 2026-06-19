@@ -11,10 +11,5 @@
         <module name="MessageManagerMicroservice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="MessageManagerMicroservice" target="1.5" />
-      <module name="StudentMicroservice" target="1.5" />
-      <module name="TeacherMicroservice" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>

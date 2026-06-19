@@ -5,7 +5,7 @@ import func_timeout
 from RabbitPC import *
 
 config_logger_producer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -15,7 +15,7 @@ config_logger_producer = {
 }
 
 config_notify_message_processor_consumer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -25,7 +25,7 @@ config_notify_message_processor_consumer = {
 }
 
 config_bids_consumer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -35,7 +35,7 @@ config_bids_consumer = {
 }
 
 config_processed_bids_producer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',

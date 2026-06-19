@@ -3,7 +3,7 @@ import func_timeout
 from RabbitPC import *
 
 config_bids_consumer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -13,7 +13,7 @@ config_bids_consumer = {
 }
 
 config_bids_producer_for_messageprocessor = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',
@@ -23,7 +23,7 @@ config_bids_producer_for_messageprocessor = {
 }
 
 config_notify_message_processor_producer = {
-    'host': '0.0.0.0',
+    'host': '127.0.0.1',
     'port': 5678,
     'username': 'student',
     'password': 'student',

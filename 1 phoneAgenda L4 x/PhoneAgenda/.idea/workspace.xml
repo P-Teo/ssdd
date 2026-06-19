@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b817d13d-26f2-4dbe-8837-f10ba1c17691" name="Default Changelist" comment="" />
+    <list default="true" id="b817d13d-26f2-4dbe-8837-f10ba1c17691" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/sd/laborator/Agenda.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/sd/laborator/Agenda.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,21 +22,26 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="1Wl8msVssEjSuXxggh9cGHO05NH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Kotlin.AgendaKt.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/sd/trytry/1 phoneAgenda L4 x/Alex/PhoneAgenda"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.sd.laborator.interfaces" />
@@ -80,35 +88,5 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="735" y="272" width="440" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1595420241958">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="735" y="272" width="440" height="569" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1595420241958" />
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1595500779148">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1595500779148" />
-    <state width="1874" height="274" key="GridCell.Tab.0.bottom" timestamp="1595453774164">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state width="1874" height="274" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1595453774164" />
-    <state width="1874" height="274" key="GridCell.Tab.0.center" timestamp="1595453774162">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state width="1874" height="274" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1595453774162" />
-    <state width="1874" height="274" key="GridCell.Tab.0.left" timestamp="1595453774160">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state width="1874" height="274" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1595453774160" />
-    <state width="1874" height="274" key="GridCell.Tab.0.right" timestamp="1595453774164">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state width="1874" height="274" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1595453774164" />
-    <state x="443" y="131" width="1024" height="852" key="SettingsEditor" timestamp="1595500771248">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="443" y="131" width="1024" height="852" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1595500771248" />
   </component>
 </project>

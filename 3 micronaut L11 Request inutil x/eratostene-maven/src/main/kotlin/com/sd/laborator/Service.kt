@@ -8,13 +8,22 @@ class Service {
     private val random_vect = Vector<Int>(100)
 
     fun calcul(seed: Long): List<Int> {
-        val adt = Vector<Int>(100)
 
-        for (i in 0 until 99) {
-            random_vect.add((Math.random()*100).toInt())
-            adt.add(random_vect[i]*random_vect[i])
+        val A = mutableListOf<Int>() // ADT A
+        val B = mutableListOf<Int>() // ADT B
+
+        var sum = 0
+
+        for (i in 0 until 100) {
+            val value = (Math.random() * 100).toInt()
+            A.add(value)
         }
 
-        return adt
+        for (i in 0 until 100) {
+            sum += A[i] * A[i]
+            B.add(sum)
+        }
+
+        return B
     }
 }

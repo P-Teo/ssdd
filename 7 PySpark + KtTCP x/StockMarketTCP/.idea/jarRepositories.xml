@@ -2,16 +2,6 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
-      <option name="id" value="jcenter" />
-      <option name="name" value="jcenter" />
-      <option name="url" value="https://jcenter.bintray.com/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="kotlinx-serialization" />
-      <option name="name" value="kotlinx-serialization" />
-      <option name="url" value="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-serialization-runtime" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
@@ -22,14 +12,24 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="kotlinx" />
       <option name="name" value="kotlinx" />
       <option name="url" value="https://kotlin.bintray.com/kotlinx" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="jboss.community" />
-      <option name="name" value="JBoss Community repository" />
-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+      <option name="id" value="kotlinx-serialization" />
+      <option name="name" value="kotlinx-serialization" />
+      <option name="url" value="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-serialization-runtime" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jcenter" />
+      <option name="name" value="jcenter" />
+      <option name="url" value="https://jcenter.bintray.com/" />
     </remote-repository>
   </component>
 </project>

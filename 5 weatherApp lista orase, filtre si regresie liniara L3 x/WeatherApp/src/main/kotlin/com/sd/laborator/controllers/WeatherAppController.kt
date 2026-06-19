@@ -1,53 +1,34 @@
 package com.sd.laborator.controllers
 
-import com.sd.laborator.interfaces.CityFileReaderInterface
-import com.sd.laborator.interfaces.FilterInterface
-import com.sd.laborator.interfaces.LocationSearchInterface
-import com.sd.laborator.interfaces.WeatherForecastInterface
-import com.sd.laborator.pojo.WeatherForecastData
-import com.sd.laborator.services.*
-import org.springframework.beans.factory.annotation.Autowired
+import com.sd.laborator.interfaces.RegressionInterface
+import com.sd.laborator.services.WeatherOrchestrator
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
-import java.io.File
 
 @Controller
-class WeatherAppController {
-    @Autowired
-    private lateinit var locationSearchService: LocationSearchInterface
+class WeatherAppController(
+    private val orchestrator: WeatherOrchestrator,
+    private val regressionService: RegressionInterface
+) {
 
-    @Autowired
-    private lateinit var weatherForecastService: WeatherForecastInterface
-
-    @RequestMapping("/getforecast/{location}", method = [RequestMethod.GET])
+    @GetMapping("/city/{cityName}")
     @ResponseBody
-    fun getForecast(@PathVariable location: String): String {
-        // se incearca preluarea WOEID-ului locaţiei primite in URL
-        val locationId = locationSearchService.getLocationId(location)
+    fun getCityData(
+        @PathVariable cityName: String
+    ): String {
 
-        // dacă locaţia nu a fost găsită, răspunsul va fi corespunzător
-        if (locationId == -1) {
-            return "Nu s-au putut gasi date meteo pentru cuvintele cheie \"$location\"!"
-        }
+        val data = orchestrator.getFilteredData(cityName)
+        val angle = regressionService.calculateAngle(data)
 
-        // pe baza ID-ului de locaţie, se interoghează al doilea serviciu care returnează datele meteo
-        // încapsulate într-un obiect POJO
+        return """
+            Date filtrate:
+            $data
 
-        val rawForecastData: WeatherForecastData = weatherForecastService.getForecastData(locationId)
+            <br><br>
 
-        // fiind obiect POJO, funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
-        return rawForecastData.toString()
-    }
-
-    @RequestMapping("/getforecast/file", method = [RequestMethod.GET])
-    @ResponseBody
-    fun getForecastFromFile(): String {
-        val filteredListGetterService =
-            FilteredListGetterService(locationSearchService as LocationSearchService, weatherForecastService as WeatherForecastService)
-
-        return filteredListGetterService.get() + "<br><br><hr>" + LinearRegression(filteredListGetterService).getSlope()
+            Unghi regresie (minTemp vs maxTemp): $angle grade
+        """.trimIndent()
     }
 }
